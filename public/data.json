@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Cox's Bazar",
+    "description": "Cox's Bazar is a famous tourist destination in Bangladesh known for its long natural sea beach. It's a popular spot for beach lovers and offers a variety of water activities."
+  },
+  {
+    "id": 2,
+    "title": "Sundarbans",
+    "description": "The Sundarbans is a vast mangrove forest in Bangladesh, home to the Bengal tiger. It's a UNESCO World Heritage Site and an important ecosystem for wildlife conservation."
+  },
+  {
+    "id": 3,
+    "title": "Sreemangal",
+    "description": "Sreemangal is often called the 'Tea Capital of Bangladesh' due to its lush tea gardens. It's a serene place for nature enthusiasts and offers beautiful landscapes."
+  },
+  {
+    "id": 4,
+    "title": "Sajek",
+    "description": "Sajek Valley is a picturesque hill station in the Chittagong Hill Tracts of Bangladesh. It's known for its lush green hills, indigenous communities, and stunning natural beauty."
+  }
+]
