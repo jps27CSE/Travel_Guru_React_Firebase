@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import backgroundImage from "../../assets/images/Rectangle1.png";
 import Logo from "../../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import pic1 from "../../assets/images/Sajek.png";
 import pic2 from "../../assets/images/Sreemongol.png";
 import pic3 from "../../assets/images/sundorbon.png";
+import Booking from "./Booking/Booking";
 const Home = () => {
   const [fulldata, setFullData] = useState([]);
   const [showData, setShowData] = useState(1);
   const [showPic, setShowPic] = useState(backgroundImage);
+  const [showBooking, setShowBooking] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("data.json")
@@ -20,6 +23,10 @@ const Home = () => {
 
   const handleImageChange = (imageSrc) => {
     setShowPic(imageSrc);
+  };
+
+  const handleBooking = () => {
+    setShowBooking(!showBooking);
   };
 
   return (
@@ -52,7 +59,10 @@ const Home = () => {
               News
             </li>
           </NavLink>
-          <button className="absolute top-0 mt-5 left-[500px] md:left-[900px] lg:left-[1100px]   btn bg-[#F9A51A] border-none">
+          <button
+            onClick={() => navigate("/login")}
+            className="absolute top-0 mt-5 left-[500px] md:left-[900px] lg:left-[1100px]   btn bg-[#F9A51A] border-none"
+          >
             Login
           </button>
         </div>
@@ -65,46 +75,55 @@ const Home = () => {
               <p className="text-white text-xl ml-2 mb-2">
                 {showFilterData?.description}
               </p>
-              <button className="btn border-none bg-[#F9A51A]">Booking</button>
+              <button
+                onClick={handleBooking}
+                className="btn border-none bg-[#F9A51A]"
+              >
+                Booking
+              </button>
             </div>
           </div>
         </div>
         <div className="cols-span-2  ml-[600px]">
-          <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-            <div
-              onClick={() => {
-                setShowData(4), handleImageChange(pic1);
-              }}
-              className="carousel-item flex flex-col cursor-pointer"
-            >
-              <img src={pic1} className="rounded-box h-96" />
-              <h1 className="text-white text-2xl text-center font-bold">
-                Sajek
-              </h1>
+          {showBooking ? (
+            <Booking />
+          ) : (
+            <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+              <div
+                onClick={() => {
+                  setShowData(4), handleImageChange(pic1);
+                }}
+                className="carousel-item flex flex-col cursor-pointer"
+              >
+                <img src={pic1} className="rounded-box h-96" />
+                <h1 className="text-white text-2xl text-center font-bold">
+                  Sajek
+                </h1>
+              </div>
+              <div
+                onClick={() => {
+                  setShowData(3), handleImageChange(pic2);
+                }}
+                className="carousel-item  flex flex-col cursor-pointer"
+              >
+                <img src={pic2} className="rounded-box  h-96" />
+                <h1 className="text-white text-2xl text-center font-bold">
+                  Sremongol
+                </h1>
+              </div>
+              <div
+                onClick={() => {
+                  setShowData(2), handleImageChange(pic3);
+                }}
+                className="carousel-item  flex flex-col cursor-pointer"
+              >
+                <img src={pic3} className="rounded-box  h-96" />
+                <h1 className="text-white text-2xl text-center font-bold">
+                  Sundorbon
+                </h1>
+              </div>
             </div>
-            <div
-              onClick={() => {
-                setShowData(3), handleImageChange(pic2);
-              }}
-              className="carousel-item  flex flex-col cursor-pointer"
-            >
-              <img src={pic2} className="rounded-box  h-96" />
-              <h1 className="text-white text-2xl text-center font-bold">
-                Sremongol
-              </h1>
-            </div>
-            <div
-              onClick={() => {
-                setShowData(2), handleImageChange(pic3);
-              }}
-              className="carousel-item  flex flex-col cursor-pointer"
-            >
-              <img src={pic3} className="rounded-box  h-96" />
-              <h1 className="text-white text-2xl text-center font-bold">
-                Sundorbon
-              </h1>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
