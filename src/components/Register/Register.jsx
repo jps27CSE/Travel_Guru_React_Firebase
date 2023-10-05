@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import Navbar from "../Navbar/Navbar";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useLocation } from "react-router-dom";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const location = useLocation();
+  console.log(location);
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -15,6 +18,10 @@ const Register = () => {
     if (password !== confirm_password) {
       return alert("Password Not Matched");
     }
+
+    createUser(email, password)
+      .then((user) => console.log(user))
+      .catch((error) => console.log(error.message));
   };
   return (
     <div className="max-w-6xl mx-auto">

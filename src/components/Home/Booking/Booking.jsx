@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const Booking = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-[300px] h-[420px] bg-white rounded-lg flex justify-center">
       <div className="p-5 flex flex-col">
@@ -27,7 +31,12 @@ const Booking = () => {
             className="input input-bordered w-full max-w-xs"
           />
         </div>
-        <button className="btn bg-[#F9A51A] w-full mt-2">Start Booking</button>
+        <button
+          onClick={() => navigate("/booking")}
+          className="btn bg-[#F9A51A] w-full mt-2"
+        >
+          Start Booking
+        </button>
       </div>
     </div>
   );

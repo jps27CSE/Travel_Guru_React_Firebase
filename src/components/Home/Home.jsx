@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import backgroundImage from "../../assets/images/Rectangle1.png";
 import Logo from "../../assets/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -6,12 +6,15 @@ import pic1 from "../../assets/images/Sajek.png";
 import pic2 from "../../assets/images/Sreemongol.png";
 import pic3 from "../../assets/images/sundorbon.png";
 import Booking from "./Booking/Booking";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 const Home = () => {
   const [fulldata, setFullData] = useState([]);
   const [showData, setShowData] = useState(1);
   const [showPic, setShowPic] = useState(backgroundImage);
   const [showBooking, setShowBooking] = useState(false);
   const navigate = useNavigate();
+
+  const { logoutUser, user } = useContext(AuthContext);
 
   useEffect(() => {
     fetch("data.json")
@@ -59,12 +62,21 @@ const Home = () => {
               News
             </li>
           </NavLink>
-          <button
-            onClick={() => navigate("/login")}
-            className="absolute top-0 mt-5 left-[500px] md:left-[900px] lg:left-[1100px]   btn bg-[#F9A51A] border-none"
-          >
-            Login
-          </button>
+          {!user ? (
+            <button
+              onClick={() => navigate("/login")}
+              className="absolute top-0 mt-5 left-[500px] md:left-[900px] lg:left-[1100px]   btn bg-[#F9A51A] border-none"
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              onClick={() => logoutUser()}
+              className="absolute top-0 mt-5 left-[500px] md:left-[900px] lg:left-[1100px]   btn bg-[#F9A51A] border-none"
+            >
+              Logout
+            </button>
+          )}
         </div>
         <div className="grid grid-cols-3 ">
           <div>

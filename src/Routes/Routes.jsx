@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../components/Home/Home";
-import Booking from "../components/Home/Booking/Booking";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import BookingItem from "../components/BookingItem/BookingItem";
+import PrivateRoute from "./PrivateRoute";
+import AuthRouteGuard from "./AuthRouteGuard";
 
 const router = createBrowserRouter([
   {
@@ -12,16 +14,28 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       {
-        path: "/booking/:id",
-        element: <Booking />,
-      },
-      {
         path: "/login",
-        element: <Login />,
+        element: (
+          <AuthRouteGuard>
+            <Login />,
+          </AuthRouteGuard>
+        ),
       },
       {
         path: "/register",
-        element: <Register />,
+        element: (
+          <AuthRouteGuard>
+            <Register />
+          </AuthRouteGuard>
+        ),
+      },
+      {
+        path: "/booking",
+        element: (
+          <PrivateRoute>
+            <BookingItem />
+          </PrivateRoute>
+        ),
       },
     ],
   },
