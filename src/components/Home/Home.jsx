@@ -7,6 +7,8 @@ import pic2 from "../../assets/images/Sreemongol.png";
 import pic3 from "../../assets/images/sundorbon.png";
 import Booking from "./Booking/Booking";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Home = () => {
   const [fulldata, setFullData] = useState([]);
   const [showData, setShowData] = useState(1);
@@ -15,6 +17,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   const { logoutUser, user } = useContext(AuthContext);
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      offset: 500,
+    });
+  }, []);
 
   useEffect(() => {
     fetch("data.json")
@@ -100,7 +109,10 @@ const Home = () => {
           {showBooking ? (
             <Booking />
           ) : (
-            <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+            <div
+              data-aos="zoom-in"
+              className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box"
+            >
               <div
                 onClick={() => {
                   setShowData(4), handleImageChange(pic1);

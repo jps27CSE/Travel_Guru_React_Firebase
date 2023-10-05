@@ -1,12 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      offset: 500,
+    });
+  }, []);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +36,7 @@ const Login = () => {
     <div className="max-w-6xl mx-auto">
       <Navbar />
       <div className="mt-5">
-        <div className=" min-h-screen ">
+        <div data-aos="zoom-in" className=" min-h-screen ">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
               <form className="card-body" onSubmit={handleLoginSubmit}>
